@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}"/>
+    <script src="https://kit.fontawesome.com/3395c408c6.js" crossorigin="anonymous"></script>
+    <title>My Categories</title>
+</head>
+<body>
+    <div class="container">
+	    <div th:if="${errors}">
+            <div class="alert alert-danger" role="alert">
+                <ul>
+                    <li th:each="error : ${errors}" th:object="${error}">
+                            [[*{defaultMessage}]]
+                    </li>
+                </ul>
+            </div>
+		</div>
+		
+        <form
+            method="POST"
+            th:action="@{/user/category/create}"
+            th:object="${category}"
+            >
+            <div class="mb-3">
+	            <label for="label" class="form-label">Label</label>
+	            <input type="text" class="form-control" id="label" name="label" th:field="*{label}">
+            </div>
+            <div class="mb-3">
+                <label for="color" class="form-label">Color</label>
+                <input type="color" class="form-control" id="color" name="color" th:field="*{color}">
+            </div>
+	        <button type="submit" value="CREATE" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+        </form>
+    </div>
+</body>
+</html>
